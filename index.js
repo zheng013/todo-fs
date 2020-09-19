@@ -11,6 +11,12 @@ program
   .action((taskName) => {
     console.log(`add ${taskName}`);
   });
+program
+  .command('clear [destination]')
+  .description('clear  tasks')
+  .action((...args) => {
+    console.log(args[1].args);
+  });
  
 program.parse(process.argv);
 if (program.debug) console.log(program.opts());
