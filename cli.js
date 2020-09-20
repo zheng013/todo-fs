@@ -1,4 +1,8 @@
 const  program  = require('commander');
+const homedir=require('os').homedir()
+const home=process.env.home||homedir //获取加目录
+
+
 const api=require('./index.js')
 program
   .option('-d, --debug', 'output extra debugging')
