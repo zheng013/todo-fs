@@ -9,3 +9,6 @@ module.exports.add = async (taskName) => {
   });
   await db.write(todoList);
 };
+module.exports.clear = async () => {
+  await db.write([]);
+};

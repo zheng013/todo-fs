@@ -16,10 +16,12 @@ program
   .command("clear [destination]")
   .description("clear  tasks")
   .action((...args) => {
-    console.log(args[1].args);
+    api.clear();
   });
 
 program.parse(process.argv);
 if (program.debug) console.log(program.opts());
 if (program.small) console.log("- small pizza size");
+
 if (program.pizzaType) console.log(`- ${program.pizzaType}`);
+if (program.cli) console.log(`cli`);
