@@ -12,3 +12,9 @@ module.exports.add = async (taskName) => {
 module.exports.clear = async () => {
   await db.write([]);
 };
+module.exports.showAll = async () => {
+  const list = await db.read();
+  list.map((val, index) => {
+    console.log(`${index + 1} ${val.done ? "[x]" : "[_]"} ${val.taskName}`);
+  });
+};

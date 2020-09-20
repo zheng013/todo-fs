@@ -5,6 +5,10 @@ program
   .option("-d, --debug", "output extra debugging")
   .option("-s, --small", "small pizza size")
   .option("-p, --pizza-type <type>", "flavour of pizza");
+if (process.argv.length === 2) {
+  api.showAll();
+  return;
+}
 program
   .command("add <taskName>")
   .description("add a task")
@@ -18,8 +22,8 @@ program
   .action((...args) => {
     api.clear();
   });
-
 program.parse(process.argv);
+
 if (program.debug) console.log(program.opts());
 if (program.small) console.log("- small pizza size");
 
