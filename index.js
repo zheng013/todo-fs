@@ -13,6 +13,19 @@ module.exports.add = async (taskName) => {
 module.exports.clear = async () => {
   await db.write([]);
 };
+function doneTask(list, taskIndex) {
+  list[taskIndex].done = true;
+  db.write(list);
+}
+function todoTask(list, taskIndex) {
+  list[taskIndex].done = false;
+  db.write(list);
+}
+function deleteTask(list, taskIndex) {
+  list.splice(taskIndex, 1);
+  db.write(list);
+}
+
 function operateTask(list, taskIndex) {
   inquirer
     .prompt([
@@ -25,33 +38,35 @@ function operateTask(list, taskIndex) {
 
         choices: [
           { name: "退出", value: "exit" },
-          { name: "已完成", value: "done" },
-          { name: "未完成", value: "todo" },
-          { name: "删除", value: "delete" },
-          { name: "修改任务", value: "edit" },
+          { name: "已完成", value: "doneTask" },
+          { name: "未完成", value: "todoTask" },
+          { name: "删除", value: "deleteTask" },
+          { name: "修改任务", value: "editTask" },
         ],
       },
     ])
     .then((answers) => {
-      switch (answers.operation) {
-        case "exit":
-          break;
-        case "done":
-          list[taskIndex].done = true;
-          break;
-        case "todo":
-          list[taskIndex].done = false;
-          break;
-        case "delete":
-          list.splice(taskIndex, 1);
-          break;
-        case "edit":
-          editTask(list, taskIndex);
-          break;
-        default:
-          break;
-      }
-      db.write(list);
+      // TODO
+      const table = { doneTask, todoTask, deleteTask, editTask };
+      table[answers.operation] && table[answers.operation](list, taskIndex);
+      //   switch (answers.operation) {
+      //     case "exit":
+      //       break;
+      //     case "doneTask":
+      //       doneTask(list, taskIndex);
+      //       break;
+      //     case "todoTask":
+      //       todoTask(list, taskIndex);
+      //       break;
+      //     case "deleteTask":
+      //       deleteTask(list, taskIndex);
+      //       break;
+      //     case "editTask":
+      //       editTask(list, taskIndex);
+      //       break;
+      //     default:
+      //       break;
+      //   }
     });
 }
 function editTask(list, taskIndex) {
