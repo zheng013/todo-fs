@@ -1,6 +1,5 @@
 const  program  = require('commander');
-const homedir=require('os').homedir()
-const home=process.env.home||homedir //获取加目录
+
 
 
 const api=require('./index.js')
@@ -24,6 +23,5 @@ program
 
 program.parse(process.argv);
 if (program.debug) console.log(program.opts());
-console.log('pizza details:');
 if (program.small) console.log('- small pizza size');
 if (program.pizzaType) console.log(`- ${program.pizzaType}`);
