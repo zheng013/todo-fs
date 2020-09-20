@@ -5,5 +5,8 @@
   "license": "MIT",
   "dependencies": {
     "commander": "^6.1.0"
+  },
+  "devDependencies": {
+    "@types/commander": "^2.12.2"
   }
 }
