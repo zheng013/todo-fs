@@ -15,6 +15,6 @@ module.exports.clear = async () => {
 module.exports.showAll = async () => {
   const list = await db.read();
   list.map((val, index) => {
-    console.log(`${index + 1} ${val.done ? "[x]" : "[_]"} ${val.taskName}`);
+    console.log(` ${val.done ? "[x]" : "[_]"} ${index + 1} - ${val.taskName}`);
   });
 };
